@@ -1,3 +1,4 @@
+// import CharacterCard from "@/components/characters/CharacterCard";
 import Image from "next/image";
 
 export default function Home() {

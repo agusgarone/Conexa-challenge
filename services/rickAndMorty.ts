@@ -1,6 +1,7 @@
 import api from "@/utils/api";
 
-export const getAllCharacters = () => api.get("/character");
+export const getAllCharacters = (page?: number) =>
+  api.get(`/character?page=${page ? page : 1}`);
 
 export const getAllEpisodes = () => api.get("/episode");
 

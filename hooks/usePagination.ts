@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
+import { Character } from "@/models/Types";
 
 const usePagination = (
-  fetchDataFn: () => Promise<AxiosResponse<unknown, unknown>>,
+  fetchDataFn: (page?: number) => Promise<AxiosResponse>,
   initialPage = 1
 ) => {
   const [currentPage, setCurrentPage] = useState<number>(initialPage);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Character[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -14,10 +15,9 @@ const usePagination = (
     async (page: number) => {
       setLoading(true);
       try {
-        const res = await fetchDataFn();
-        console.log("res", res);
-        setData([]);
-        setTotalPages(1);
+        const res = await fetchDataFn(page);
+        setData(res.data.results);
+        setTotalPages(res.data.info.pages);
         setCurrentPage(page);
       } catch (error) {
         console.error(error);

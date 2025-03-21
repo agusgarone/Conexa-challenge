@@ -36,12 +36,25 @@ const useEpisodes = ({ character1, character2 }: IUseEpisodes) => {
         });
         return getMultipleEpisodes(episodes).then((response) => response);
       };
-      const responseSharedEp = await fetchDetails(shared);
-      const responseOnly1 = await fetchDetails(only1);
-      const responseOnly2 = await fetchDetails(only2);
-      setSharedEpisodes(responseSharedEp.data);
-      setOnlyEpisodes1(responseOnly1.data);
-      setOnlyEpisodes2(responseOnly2.data);
+
+      const checkData = async (episodes: string[]) => {
+        if (episodes.length) {
+          const response = await fetchDetails(episodes);
+          if (response.data.length) {
+            return response.data;
+          }
+          return [response.data];
+        }
+        return [];
+      };
+
+      const responseSharedEp = await checkData(shared);
+      const responseOnly1 = await checkData(only1);
+      const responseOnly2 = await checkData(only2);
+
+      setSharedEpisodes(responseSharedEp);
+      setOnlyEpisodes1(responseOnly1);
+      setOnlyEpisodes2(responseOnly2);
     }
 
     fetchEpisodes();

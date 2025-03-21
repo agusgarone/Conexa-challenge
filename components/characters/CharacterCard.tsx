@@ -4,12 +4,17 @@ import React from "react";
 
 const CharacterCard = ({
   character,
+  selected,
 }: {
   character: Character;
   selected: boolean;
 }) => {
   return (
-    <div className="bg-[#41454d] w-full max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer border-2 border-transparent hover:border-[#01b4c6]">
+    <div
+      className={`bg-[#41454d] w-full max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer border-2 hover:border-[#01b4c6] ${
+        selected ? "border-[#f7e14b]" : "border-transparent"
+      }`}
+    >
       <Image
         className="w-full h-48 object-cover"
         width={200}
@@ -18,8 +23,13 @@ const CharacterCard = ({
         alt={character.name}
       />
 
-      <div className="px-4 py-3">
-        <h3 className="font-bold text-lg text-[#f8f8f8]">{character.name}</h3>
+      <div className="px-4 py-3 h-[130px]">
+        <h3
+          title={character.name}
+          className="font-bold text-lg text-[#f8f8f8] line-clamp-2"
+        >
+          {character.name}
+        </h3>
 
         <div className="flex items-center mt-2">
           <span

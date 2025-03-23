@@ -16,6 +16,7 @@ const CharacterCard = ({
       }`}
     >
       <Image
+        data-testid="character-image"
         className="w-full h-48 object-cover"
         width={200}
         height={200}

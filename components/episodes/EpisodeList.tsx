@@ -32,7 +32,7 @@ const EpisodeList = ({ episodes, title }: IEpisodeList) => {
               </li>
             ))}
           </ul>
-          {paginatedData.length > 6 && (
+          {episodes.length > 6 && (
             <Navigation
               currentPage={currentPage}
               totalPages={totalPages}
